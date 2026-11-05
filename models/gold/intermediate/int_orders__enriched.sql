@@ -16,7 +16,7 @@ promos as (
     select
         *
     from {{ref('slv_sql_server_dbo__promos')}}
-)
+),
 joined as (
     select 
             o.order_id
