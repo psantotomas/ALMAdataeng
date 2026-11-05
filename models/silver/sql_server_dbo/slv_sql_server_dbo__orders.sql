@@ -4,7 +4,7 @@
 -- =============================================================================
 
 with orders as (
-    select * from {{ ref('stg_sql_server_dbo__orders.sql') }}
+    select * from {{ ref('stg_sql_server_dbo__orders') }}
 ),
 
 cleaned as (
