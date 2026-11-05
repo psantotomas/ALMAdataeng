@@ -4,7 +4,7 @@
 -- =============================================================================
 
 with orders as (
-    select * from {{ ref('stg_sql_server_dbo__orders') }}
+    select * from {{ ref('stg_sql_server_dbo__orders.sql') }}
 ),
 
 cleaned as (
@@ -12,7 +12,7 @@ cleaned as (
          * exclude(is_deleted)
     from orders
     where not is_deleted
-    qualify row_number() over (partition by address_id order by date_load desc) = 1
+    qualify row_number() over (partition by order_id order by date_load desc) = 1
 )
 
 select * from cleaned
