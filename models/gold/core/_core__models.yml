@@ -143,6 +143,22 @@ models:
                 store_failures: true/*
 
 
+unit_tests:
+  - name: test_dim_products_categoriza_stock
+    model: dim_products
+    given:
+      - input: ref('slv_sql_server_dbo__products') 
+        rows: 
+          - {product_id: u1, product_name: 'p1', unit_price_usd: 1, inventory_units: 0, date_load: '2026-01-01.'}
+          - {product_id: u2, product_name: 'p2', unit_price_usd: 2, inventory_units: 5, date_load: '2026-01-01.'}
+          - {product_id: u3, product_name: 'p3', unit_price_usd: 3, inventory_units: 100, date_load: '2026-01-01.'}
+    expect:
+      rows:
+      - {product_id: u1, product_name: 'p1', unit_price_usd: 1, inventory_units: 0, stock_status: 'out_of_stock', date_load: '2026-01-01.'}
+      - {product_id: u2, product_name: 'p2', unit_price_usd: 2, inventory_units: 5, stock_status: 'low_stock', date_load: '2026-01-01.'}
+      - {product_id: u3, product_name: 'p3', unit_price_usd: 3, inventory_units: 100, stock_status: 'in_stock', date_load: '2026-01-01.'}
+
+
 #unit_tests:
   # Fixture CSV en el expect (tests/fixtures/dim_users__email_expected.csv) e
   # input también desde CSV: útil cuando hay muchos casos.
