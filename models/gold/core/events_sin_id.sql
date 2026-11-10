@@ -2,4 +2,4 @@
 
 select
     {{dbt_utils.star(from = ref('fct_events'), except = excluded)}}
-from {ref('fct_events')}
+from {{ref('fct_events')}}

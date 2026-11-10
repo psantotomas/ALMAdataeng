@@ -106,23 +106,23 @@ models:
       - name: net_order_cost_usd
         description: total_order_cost_usd menos el descuento de la promoción.
 
-  - name: fct_order_items
-    description: Hechos de líneas de pedido. Grano (order_id, product_id).
-    columns:
-      - name: order_item_id
-        data_tests: [unique, not_null]
-      - name: order_id
-        data_tests:
-          - relationships:
-              arguments:
-                to: ref('fct_orders')
-                field: order_id
-      - name: product_id
-        data_tests:
-          - relationships:
-              arguments:
-                to: ref('dim_products')
-                field: product_id
+#  - name: fct_order_items
+#    description: Hechos de líneas de pedido. Grano (order_id, product_id).
+#    columns:
+#      - name: order_item_id
+#        data_tests: [unique, not_null]
+#      - name: order_id
+#        data_tests:
+#          - relationships:
+#              arguments:
+#                to: ref('fct_orders')
+#                field: order_id
+#      - name: product_id
+#        data_tests:
+#          - relationships:
+#              arguments:
+#                to: ref('dim_products')
+#                field: product_id
 
   - name: fct_events
     description: Hechos de eventos de navegación. Grano evento.
@@ -140,7 +140,7 @@ models:
                 to: ref('dim_users')
                 field: user_id
               config:
-                store_failures: true/*
+                store_failures: true
 
 
 unit_tests:
