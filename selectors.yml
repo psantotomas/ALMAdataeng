@@ -28,3 +28,4 @@ selectors:
         - exclude:
             - method: resource_type
               value: snapshot
+
