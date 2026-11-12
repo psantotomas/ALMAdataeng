@@ -45,4 +45,3 @@ deduplicated as (
 )
 
 select * from deduplicated
-
