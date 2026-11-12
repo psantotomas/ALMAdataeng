@@ -1,33 +1,12 @@
--- ================
--- Test: Devolver pedidos sin línea
--- ================
+-- =============================================================================
+-- Test singular: todo pedido debe tener al menos una línea de pedido.
+-- =============================================================================
+-- Devuelve los pedidos de fct_orders que no aparecen en fct_order_items.
+-- =============================================================================
 
-with orders as (
-    select 
-        *
-    from {{ ref('fct_orders') }}
-),
-
-order_item as (
-    select 
-        *
-    from {{ ref('slv_sql_server_dbo__order_items') }}
-),
-
-joined as (
-    select 
-        *
-    from orders o 
-    left join order_item i 
-        on o.order_id = i.order_id
-),
-
-no_line as (
-    select 
-        *
-    from joined
-    where
-        order_item_id is null
-)
-
-select * from no_line
+select
+      o.order_id
+    , o.order_created_at_utc
+from {{ ref('fct_orders') }} o
+left join {{ ref('fct_order_items') }} oi on o.order_id = oi.order_id
+where oi.order_id is null
