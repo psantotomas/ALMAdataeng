@@ -99,6 +99,8 @@ models:
         +group: core
         +access: private
       core:
+        +grants:
+          select: ['REPORTING_ROLE']
         +schema: core
         +meta:
           owner: equipo-datos-core
@@ -106,11 +108,15 @@ models:
         +group: core
         +access: public
       marketing:
+        +grants:
+          select: ['REPORTING_ROLE']
         +schema: marketing
         +meta:
           owner: equipo-marketing-analytics
         +group: marketing
       product:
+        +grants:
+          select: ['REPORTING_ROLE']
         +schema: product
         +meta:
           owner: equipo-producto
